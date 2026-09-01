@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16
+    container_name: nyaysetu-postgres
+    environment:
+      POSTGRES_USER: nyaysetu
+      POSTGRES_PASSWORD: nyaysetu_dev_only
+      POSTGRES_DB: nyaysetu
+    ports:
+      - "5432:5432"
+    volumes:
+      - nyaysetu_pgdata:/var/lib/postgresql/data
+      - ./scripts/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nyaysetu -d nyaysetu"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  nyaysetu_pgdata:

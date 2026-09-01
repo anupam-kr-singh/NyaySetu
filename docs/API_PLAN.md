@@ -1,8 +1,8 @@
 # NyaySetu — API Plan
 
-**Status:** Planned contract. No routes are implemented.
+**Status:** Phase 1 implemented subset. The canonical backend prefix is `/api`.
 
-**Base URL (planned):** `/api/v1`  
+**Base URL:** `/api`
 **Format:** JSON  
 **Auth:** `Authorization: Bearer <access_token>` unless marked public.
 
@@ -37,9 +37,9 @@ Every authenticated response that includes AI-generated text should also include
 
 | Method | Path | Auth | Purpose |
 |--------|------|------|---------|
-| POST | `/auth/register/client` | Public | Create client account |
+| POST | `/auth/register` | Public | Create client account |
 | POST | `/auth/register/lawyer` | Public | Create lawyer user + empty profile |
-| POST | `/auth/login` | Public | Issue access + refresh tokens |
+| POST | `/auth/login` | Public | Issue rotating access + refresh tokens |
 | POST | `/auth/refresh` | Refresh token | New access token |
 | POST | `/auth/logout` | Authenticated | Revoke refresh token if stored |
 | GET | `/auth/me` | Authenticated | Current user + role |
@@ -61,14 +61,14 @@ Every authenticated response that includes AI-generated text should also include
 
 | Method | Path | Auth | Purpose |
 |--------|------|------|---------|
-| GET | `/lawyers` | Client or admin | List **verified** lawyers; filters: specialization, city |
-| GET | `/lawyers/{id}` | Client, lawyer (own), admin | Public profile if verified; full if owner/admin |
+| GET | `/lawyers` | Not implemented | Lawyer listing/matching is Phase 3+ |
+| GET | `/lawyers/{id}` | Not implemented | Public profile rules await verification workflow |
 | GET | `/lawyers/me` | Lawyer | Own profile including unverified fields |
 | PUT | `/lawyers/me` | Lawyer | Bio, jurisdiction, city, experience, accepting flag |
 | PUT | `/lawyers/me/specializations` | Lawyer | Replace specialization set |
 | GET | `/lawyers/me/availability` | Lawyer | List windows |
 | PUT | `/lawyers/me/availability` | Lawyer | Replace weekly availability |
-| POST | `/lawyers/me/verification-request` | Lawyer | Set status to `pending` |
+| POST | `/lawyers/me/verification-request` | Not implemented | Verification is Phase 3 |
 
 Clients never receive bar numbers unless product policy later allows it; default is to hide registration numbers from public profile payloads.
 

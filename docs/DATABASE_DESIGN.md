@@ -1,6 +1,6 @@
 # NyaySetu — Database Design (Proposed)
 
-**Status:** Logical design only. No tables, ORM models, or migrations have been created.
+**Status:** Phase 1 implements `users`, `refresh_tokens`, `lawyer_profiles`, `specializations`, and `lawyer_specializations`. All other entities remain design-only.
 
 **Engine (planned):** PostgreSQL  
 **Access (planned):** SQLAlchemy 2.x  

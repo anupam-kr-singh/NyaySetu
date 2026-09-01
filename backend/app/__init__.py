@@ -1,0 +1,1 @@
+"""NyaySetu backend application package."""

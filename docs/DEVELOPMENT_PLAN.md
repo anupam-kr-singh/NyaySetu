@@ -22,6 +22,8 @@ Work is strictly **phase-by-phase**. Do not implement later phases until the cur
 
 ## Phase 1 — Backend foundation, database, authentication
 
+**Status: Implemented (Phase 1A/1B).** Authentication, rotating refresh tokens, revocation, lawyer-account/profile foundation, and specializations are present. Lawyer verification, public listings, availability, matching, and all later product features remain unimplemented.
+
 **Goal:** A running FastAPI service with PostgreSQL and JWT roles.
 
 **Includes:**

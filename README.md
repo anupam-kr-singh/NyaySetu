@@ -10,7 +10,9 @@ This software is an **informational and consultation aid**. It is **not** a lawy
 
 ## Current status
 
-**Architecture and documentation only.** The application is not implemented yet. There is no trained model, no database schema in production, no LLM integration, and **no experimental accuracy to report**.
+**Phase 1 (backend foundation) is implemented:** FastAPI, PostgreSQL, Alembic, JWT auth, and role checks. There is no trained model, no LLM integration, and **no experimental accuracy to report**.
+
+Setup: [docs/BACKEND_SETUP.md](docs/BACKEND_SETUP.md) and [backend/README.md](backend/README.md).
 
 ---
 
@@ -48,10 +50,10 @@ User → legal query → NLP preprocessing → TF-IDF → ML classification (Mul
 ```
 docs/             Architecture and plans
 frontend/         Next.js app (not created yet)
-backend/          FastAPI app (not created yet)
+backend/          FastAPI app (Phase 1: auth + health)
 ml/               Training and evaluation (not created yet)
 knowledge_base/   Curated sources and indexes (empty)
-tests/            Automated tests (not created yet)
+tests/            Reserved (backend tests live in backend/tests/)
 ```
 
 ---
@@ -63,10 +65,24 @@ tests/            Automated tests (not created yet)
 - [Database design](docs/DATABASE_DESIGN.md)
 - [API plan](docs/API_PLAN.md)
 
-Copy `.env.example` to `.env` when implementation begins. Never commit secrets. Never put LLM API keys in frontend code.
+Copy `.env.example` to `.env` and follow [docs/BACKEND_SETUP.md](docs/BACKEND_SETUP.md). Never commit secrets. Never put LLM API keys in frontend code.
+
+### Backend (Phase 1)
+
+```powershell
+cd backend
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+alembic upgrade head
+uvicorn app.main:app --reload --port 8000
+pytest
+```
+
+PostgreSQL must be running. `docker compose up -d db` from the repo root starts a local development database.
 
 ---
 
 ## Next step
 
-See **Phase 1** in `docs/DEVELOPMENT_PLAN.md`: backend foundation, PostgreSQL, and authentication. Do not skip ahead to ML training or LLM integration.
+See **Phase 2** in `docs/DEVELOPMENT_PLAN.md` (frontend shell). Do not start ML, LLM, or RAG until that work is requested.
